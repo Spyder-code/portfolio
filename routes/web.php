@@ -45,6 +45,10 @@ Route::prefix('admin')->group(function () {
     Route::resource('app', ApplicationController::class);
 });
 
+Route::domain('dev.spydercode.my.id')->group(function () {
+    Route::get('/',[App\Http\Controllers\PageController::class, 'developer']);
+});
+
 Route::get('/', [App\Http\Controllers\PageController::class, 'index'])->name('user.home');
 Route::get('/dev', [App\Http\Controllers\PageController::class, 'developer'])->name('user.developer')->middleware('visitor');
 Route::get('/review', [App\Http\Controllers\ReviewController::class, 'index'])->name('user.review');
@@ -57,7 +61,3 @@ Route::get('/instagram', [App\Http\Controllers\PageController::class, 'instagram
 Route::get('/{article}', [App\Http\Controllers\PageController::class, 'article_read'])->name('article.read');
 Route::post('/review', [App\Http\Controllers\ReviewController::class, 'store'])->name('review.store');
 Route::resource('event-c', EventController::class);
-
-Route::domain('dev.spydercode.my.id')->group(function () {
-    Route::get('/',[App\Http\Controllers\PageController::class, 'developer']);
-});
